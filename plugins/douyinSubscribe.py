@@ -153,7 +153,6 @@ class DouyinSubscribe(StandardPlugin):
             createDouyinTable()
         #self.pattern1 = re.compile(r'^订阅\s*([0-9A-Fa-f]+)$')
         self.pattern1 = re.compile(r'^抖音订阅\s*(?:https://www\.douyin\.com/user/(\S*)|(https://v\.douyin\.com/(?:\S+))|(\S+$))')
-
         self.pattern2 = re.compile(r'^取消抖音订阅\s*(\S+)$')
         self.pattern3 = re.compile(r'^抖音订阅$')
         self.bUps:Dict[int,DouyinMonitor] = {}
@@ -215,7 +214,7 @@ class DouyinSubscribe(StandardPlugin):
         if self.pattern1.match(msg) != None:
             matched_tuple = self.pattern1.findall(msg)[0]
             if(matched_tuple[0]):
-                uid = matched_tuple[0].split("?")[0].split("/")[5]
+                uid = matched_tuple[0]
             elif (matched_tuple[1]):
                 short_url = matched_tuple[1]
                 uid = requests.get(url = short_url).url.split("?")[0].split("/")[5]
